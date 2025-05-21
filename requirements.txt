@@ -7,3 +7,4 @@ pdf2image
 torch
 transformers
 pytesseract
+protobuf==3.20.3
