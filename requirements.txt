@@ -1,0 +1,8 @@
+streamlit
+PyPDF2
+sentence-transformers
+chromadb
+Pillow
+pdf2image
+torch
+transformers
