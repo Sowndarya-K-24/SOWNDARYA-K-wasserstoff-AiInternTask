@@ -1,4 +1,7 @@
 import os
+os.environ["HOME"] = "/tmp"
+os.environ["STREAMLIT_HOME"] = "/tmp"
+
 import pandas as pd
 import streamlit as st
 from PyPDF2 import PdfReader
@@ -10,7 +13,7 @@ from chromadb.utils import embedding_functions
 from sentence_transformers import SentenceTransformer
 from transformers import pipeline
 from pdf2image import convert_from_path
-import shutil
+import shutil 
 
 
 # --- Check if collection exists before creating ---
@@ -59,7 +62,8 @@ def extract_text_from_pdf(uploaded_file):
     reader = PdfReader(uploaded_file)
     full_text = ""
     for page in reader.pages:
-        full_text += page.extract_text() + "\n"
+        text = page.extract_text()
+        full_text += text + "\n"
     return full_text
 
 def extract_text_from_scanned_pdf(uploaded_file):
@@ -123,8 +127,8 @@ if query:
         st.write(doc_text)
         st.markdown("---")
 
-else:
-        st.warning("No matching results found based on filters.")
+elif not filtered_results:
+    st.warning("No matching results found based on filters.")
 
 # -- Tabular Output with Citations --
 
